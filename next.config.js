@@ -2,9 +2,6 @@
 const nextConfig = {
 
 
-
-
-    basePath: '/nextblogs',
 }
 
 
