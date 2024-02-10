@@ -1,3 +1,4 @@
+/* eslint no-use-before-define: 0 */  /
 import React from 'react';
 import styles from "./page.module.css";
 import Link from 'next/link';
