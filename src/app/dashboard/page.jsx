@@ -14,7 +14,7 @@ const Dashboard = () => {
   const session = useSession();
   const router = useRouter();
   const fetcher = (...args)=> fetch(...args).then(res=>res.json());
-  const {data,mutate,error,isLoading} = useSWR(`https://nextblogs-a28xi2drg-kamil2433.vercel.app/api/posts?username=${session?.data?.user?.name}`,fetcher);
+  const {data,mutate,error,isLoading} = useSWR(`${process.env.NEXT_PUBLIC_BASEURL}/api/posts?username=${session?.data?.user?.name}`,fetcher);
   console.log(data);
   if(session.status === "loading"){
     return <p>Loading...</p>
