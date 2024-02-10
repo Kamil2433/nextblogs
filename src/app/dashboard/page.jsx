@@ -1,5 +1,5 @@
+/* eslint no-use-before-define: 0 */  /
 "use client";
-
 import React from 'react'
 import styles from "./page.module.css";
 import { useSession } from 'next-auth/react';
