@@ -4,7 +4,7 @@ import Post from "@/models/Post";
 
 connect();
 
-//get all posts by a particular user
+//get all posts by a particular users
 export const GET = async (request) => {
     const url = new URL(request.url);
     const username = url.searchParams.get("username");
