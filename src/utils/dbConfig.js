@@ -21,7 +21,7 @@ export const connect=async()=>{
 
 // console.log("connected successfully to mongodb")
 
-mongoose.connect(URI,connectionParams)
+mongoose.connect("mongodb+srv://kamil:kamil@cluster0.u8ecui6.mongodb.net/?retryWrites=true&w=majority",connectionParams)
     .then( () => {
         console.log('Connected to database ')
     })
