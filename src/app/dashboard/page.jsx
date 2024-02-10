@@ -35,7 +35,7 @@ const Dashboard = () => {
 
     try {
 
-      await fetch("http://localhost:3000/api/posts",{
+      await fetch("https://nextblogs-a28xi2drg-kamil2433.vercel.app/api/posts",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({title,desc,content,username,image})
@@ -47,7 +47,7 @@ const Dashboard = () => {
   }
   const handleDelete = async(id)=>{
     try {
-        await fetch(`http://localhost:3000/api/posts/${id}`,{
+        await fetch(`https://nextblogs-a28xi2drg-kamil2433.vercel.app/api/posts/${id}`,{
           method:"DELETE"
         });
         mutate();
