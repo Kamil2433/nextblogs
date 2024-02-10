@@ -1,23 +1,33 @@
-import mongoose from "mongoose";
 
-export const connect = async () => {
 
-     
-    
+const mongoose=require('mongoose')
+const mongoURI=process.env.Mongo
 
-    try {
-        mongoose.connect(process.env.Mongo);
-        const connection = mongoose.connection;
-        connection.on('connected', () => {
-            console.log('MongoDB connected');
-        })
-        connection.on('error', (error) => {
-            console.log('MongoDB connection error.');
-            process.exit();
-        })
-    } catch (error) {
-        console.log("something went wrong");
-        console.log(error);
-    }
+// 'mongodb://127.0.0.1:27017/CloudNote1?directConnection=true'
+// mongodb://localhost:27017/
+// mongodb://127.0.0.1:27017/?directConnection=true
+
+
+const connectionParams={
+    useNewUrlParser: true,
+      useUnifiedTopology: true 
+}
+
+const connectmongo=async()=>{
+
+// const mon=await mongoose.connect(mongoURI,connectionParams)
+
+// console.log("connected successfully to mongodb")
+
+mongoose.connect(mongoURI,connectionParams)
+    .then( () => {
+        console.log('Connected to database ')
+    })
+    .catch( (err) => {
+        console.error(`Error connecting to the database. \n${err}`);
+    })
 
 }
+
+
+module.exports=connectmongo;
