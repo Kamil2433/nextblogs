@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 import Link from 'next/link';
 
 const getData = async()=>{
-  const res = await fetch("http://localhost:3000/api/posts/all",{
+  const res = await fetch("https://nextblogs-a28xi2drg-kamil2433.vercel.app/api/posts/all",{
     cache:"no-store",
   })
 
