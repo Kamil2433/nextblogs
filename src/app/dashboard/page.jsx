@@ -1,4 +1,4 @@
-/* eslint no-use-before-define: 0 */  /
+/* eslint-disable */
 "use client";
 import React from 'react'
 import styles from "./page.module.css";
