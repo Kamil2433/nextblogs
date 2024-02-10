@@ -15,7 +15,7 @@ const connectionParams={
 
 export const connect=async()=>{
 
-// const mon=await mongoose.connect(mongoURI,connectionParams)
+// const mon=await mongoose.connect(process.env.Mongo,connectionParams)
 
 // console.log("connected successfully to mongodb")
 
