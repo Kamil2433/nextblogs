@@ -17,7 +17,7 @@ export const connect=async()=>{
 
     const URI=await process.env.Mongo
 
-// const mon=await mongoose.connect(URI,connectionParams)
+// const mon=await mongoose.connect("mongodb+srv://kamil:kamil@cluster0.u8ecui6.mongodb.net/?retryWrites=true&w=majority",connectionParams)
 
 // console.log("connected successfully to mongodb")
 
