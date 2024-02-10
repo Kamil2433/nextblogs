@@ -29,7 +29,7 @@ const Blogs = async() => {
       <div className={styles.blogs}>
         {
           data.map((item)=>(
-          <Link href={`/blogs/${item._id}`}    key={item._id}>>
+          <Link href={`/blogs/${item._id}`}   >
             <div className={styles.blog}>
               <h1 className={styles.blogTitle}>{item.title}</h1>
               <p className={styles.blogDesc}>{item.desc}</p>
