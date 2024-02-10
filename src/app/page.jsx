@@ -4,6 +4,14 @@ import Button from '@/components/Button/Button'
 import HeroImg from "public/HomePageHero.jpg";
 
 export default function Home() {
+
+if(!process.env.NEXT_PUBLIC_BASEURL){
+
+    console.log("null")
+    return null
+  }
+
+  
   return (
     <div className={styles.container}>
       <div className={styles.textContent}>
