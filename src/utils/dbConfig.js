@@ -11,7 +11,7 @@ const connectionParams={
       useUnifiedTopology: true 
 }
 
-const connect=async()=>{
+export const connect=async()=>{
 
 // const mon=await mongoose.connect(mongoURI,connectionParams)
 
@@ -28,4 +28,4 @@ mongoose.connect(mongoURI,connectionParams)
 }
 
 
-module.exports=connect;
+
