@@ -1,14 +1,10 @@
-/* eslint-disable */
-
-
 import React from 'react';
 import styles from "./page.module.css";
 import Link from 'next/link';
+import { BASE_URL } from '@/utils/Constants';
 
 const getData = async()=>{
-  const res = await fetch('/api/posts/all',{
-    cache:"no-store",
-  })
+  const res = await fetch(`${process.env.DEV_URL}/api/posts/all`)
 
   console.log("here",res)
   
@@ -29,7 +25,7 @@ const Blogs = async() => {
       <div className={styles.blogs}>
         {
           data.map((item)=>(
-          <Link href={`/blogs/${item._id}`}   >
+          <Link href={`/blogs/${item._id}`}>
             <div className={styles.blog}>
               <h1 className={styles.blogTitle}>{item.title}</h1>
               <p className={styles.blogDesc}>{item.desc}</p>
