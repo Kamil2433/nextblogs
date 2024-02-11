@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 import Link from 'next/link';
 
 const getData = async()=>{
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/api/posts/all`,{
+  const res = await fetch('/api/posts/all',{
     cache:"no-store",
   })
 
