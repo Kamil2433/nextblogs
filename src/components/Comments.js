@@ -19,7 +19,7 @@ export default function Comments({id}) {
     console.log(comment)      
       
         try {
-          await fetch(`https://nextblogss-3583pbcc7-kamil2433.vercel.app/api/posts/${id}`, {
+          await fetch(`/api/posts/${id}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id, comment }),
