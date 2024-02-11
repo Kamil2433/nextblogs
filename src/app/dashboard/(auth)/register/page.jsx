@@ -5,6 +5,7 @@ import styles from "./page.module.css";
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
 
+const fetcher = params => url => post(url, params)
 
 
 const Register = () => {
@@ -16,12 +17,9 @@ const Register = () => {
     const email = e.target[1].value;
     const password = e.target[2].value;
     try {
-      const res = await fetch(`${process.env.DEV_URL}/api/auth/register`,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({name,email,password}),
-      });
-      res.status === 201 && router.push("/dashboard/login?success=Account has been created");
+    const {data,mutate,error,isLoading}= useSWR('/api/auth/register', fetcher({name,email,password}))
+
+     error && router.push("/dashboard/login?success=Account has been created");
     } catch (error) {
       setError(true);
     }
