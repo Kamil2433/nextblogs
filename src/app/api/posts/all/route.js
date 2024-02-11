@@ -17,7 +17,7 @@ console.log("here are poists")
     }
 }
 
-export const GET = async (request) => {
+export const POST = async (request) => {
     try {
 
         
