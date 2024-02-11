@@ -1,6 +1,6 @@
 import { MongoClient } from "mongodb";
 
-const uri = process.env.MONGO;
+const uri = process.env.MONGO_URI;
 const options = {
     useUnifiedTopology: true,
     useNewUrlParser: true,
@@ -9,7 +9,7 @@ const options = {
 let mongoClient = null;
 let database = null;
 
-if (!process.env.MONGO) {
+if (!process.env.MONGO_URI) {
     throw new Error('Please add your Mongo URI to .env.local')
 }
 
@@ -28,7 +28,7 @@ export async function connect() {
         } else {
             mongoClient = await (new MongoClient(uri, options)).connect();
         }
-        database = await mongoClient.db(process.env.MONGO);
+        database = await mongoClient.db(process.env.MONGO_URI);
         return { mongoClient, database };
     } catch (e) {
         console.error(e);
