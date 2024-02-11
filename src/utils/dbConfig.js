@@ -28,4 +28,4 @@ mongoose.connect(mongoURI,connectionParams)
 }
 
 
-module.exports=connectmongo;
+module.exports=connect;
