@@ -6,7 +6,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import useSWR from "swr";
 import { useState } from 'react';
-import { BASE_URL } from '@/utils/Constants';
+
 
 
 const Dashboard = () => {
