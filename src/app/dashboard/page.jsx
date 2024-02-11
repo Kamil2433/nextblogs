@@ -14,7 +14,7 @@ const Dashboard = () => {
   const session = useSession();
   const router = useRouter();
   const fetcher = (...args)=> fetch(...args).then(res=>res.json());
-  const {data,mutate,error,isLoading} = useSWR(`${process.env.NEXT_PUBLIC_BASEURL}/api/posts?username=${session?.data?.user?.name}`,fetcher);
+  const {data,mutate,error,isLoading} = useSWR(`/api/posts?username=${session?.data?.user?.name}`,fetcher);
   console.log(data);
   if(session.status === "loading"){
     return <p>Loading...</p>
@@ -35,7 +35,7 @@ const Dashboard = () => {
 
     try {
 
-      await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/api/posts`,{
+      await fetch(`/api/posts`,{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({title,desc,content,username,image})
@@ -47,7 +47,7 @@ const Dashboard = () => {
   }
   const handleDelete = async(id)=>{
     try {
-        await fetch(`${process.env.NEXT_PUBLIC_BASEURL}/api/posts/${id}`,{
+        await fetch(`/api/posts/${id}`,{
           method:"DELETE"
         });
         mutate();
