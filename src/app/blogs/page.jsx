@@ -47,21 +47,7 @@ const Blogs = () => {
   )
 }
 
-export async function getServerSideProps(ctx) {
-  // get the current environment
 
-  // request posts from api
-  let response = await fetch(`${process.env.DEV_URL}/api/posts/all`);
-  // extract the data
-  let data = await response.json();
-
-  console.log(data)
-  return {
-      props: {
-          posts:data
-      },
-  };
-}
 
 
 export default Blogs
