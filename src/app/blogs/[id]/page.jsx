@@ -1,13 +1,14 @@
 
-/* eslint-disable */
+
 import React, { } from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
 import Comments from "@/components/Comments";
+import { BASE_URL } from "@/utils/Constants";
 
 const getData = async (id) => {
   try {
-    const res = await fetch(`/api/posts/${id}`, {
+    const res = await fetch(`${process.env.DEV_URL}/api/posts/${id}`, {
       cache: "no-store",
     });
     if (!res.ok) {
