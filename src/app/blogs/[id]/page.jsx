@@ -4,7 +4,7 @@ import React, { } from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
 import Comments from "@/components/Comments";
-import { BASE_URL } from "@/utils/Constants";
+
 
 const getData = async (id) => {
   try {
