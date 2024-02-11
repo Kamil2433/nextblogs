@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import styles from "./page.module.css";
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
+import { BASE_URL } from '@/utils/Constants';
+
 
 const Register = () => {
   const {error,setError} = useState(false);
@@ -13,7 +15,7 @@ const Register = () => {
     const email = e.target[1].value;
     const password = e.target[2].value;
     try {
-      const res = await fetch("https://nextblogs-a28xi2drg-kamil2433.vercel.app/api/auth/register",{
+      const res = await fetch(`${process.env.DEV_URL}/api/auth/register`,{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({name,email,password}),
