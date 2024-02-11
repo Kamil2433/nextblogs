@@ -1,34 +1,29 @@
+import { MongoClient } from 'mongodb'
 
+const uri = process.env.Mongo
+const options = {}
 
-const mongoose=require('mongoose')
-const mongoURI=process.env.Mongo
+let client
+let clientPromise
 
-// 'mongodb://127.0.0.1:27017/CloudNote1?directConnection=true'
-// mongodb://localhost:27017/
-// mongodb://127.0.0.1:27017/?directConnection=true
-
-
-const connectionParams={
-    useNewUrlParser: true,
-      useUnifiedTopology: true 
+if (!process.env.Mongo) {
+  throw new Error('Please add your Mongo URI to .env.local')
 }
 
-export const connect=async()=>{
-
-    const URI=await process.env.Mongo
-
-// const mon=await mongoose.connect("mongodb+srv://kamil:kamil@cluster0.u8ecui6.mongodb.net/?retryWrites=true&w=majority",connectionParams)
-
-// console.log("connected successfully to mongodb")
-
-mongoose.connect("mongodb+srv://kamil:kamil@cluster0.u8ecui6.mongodb.net/?retryWrites=true&w=majority",connectionParams)
-    .then( () => {
-        console.log('Connected to database ')
-    })
-    .catch( (err) => {
-        console.error(`Error connecting to the database. \n${err}`);
-    })
-
+if (process.env.NODE_ENV === 'development') {
+  // In development mode, use a global variable so that the value
+  // is preserved across module reloads caused by HMR (Hot Module Replacement).
+  if (!global._mongoClientPromise) {
+    client = new MongoClient(uri, options)
+    global._mongoClientPromise = client.connect()
+  }
+  clientPromise = global._mongoClientPromise
+} else {
+  // In production mode, it's best to not use a global variable.
+  client = new MongoClient(uri, options)
+  clientPromise = client.connect()
 }
 
-
+// Export a module-scoped MongoClient promise. By doing this in a
+// separate module, the client can be shared across functions.
+export default clientPromise
