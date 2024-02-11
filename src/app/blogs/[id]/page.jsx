@@ -1,12 +1,18 @@
 /* eslint-disable */
-
+"use client";
 import React, { } from "react";
 import styles from "./page.module.css";
 import Image from "next/image";
 import Comments from "@/components/Comments";
 
 
-const getData = async (id) => {
+import useSWR from "swr";
+
+
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
+
+
+const getData = async(id) => {
   try {
     const res = await fetch(`${process.env.DEV_URL}/api/posts/${id}`, {
       cache: "no-store",
@@ -27,18 +33,20 @@ const getData = async (id) => {
 
 
 // const BlogPost = 
-export default  async function BlogPost({ params }) {
+export default function BlogPost({ params }) {
   // const [comment, setcomment] = useState(" ");
   
   
   const id = params.id;
   
-  const data=await getData(id);
+  // const data=await getData(id);
+
+  const {data,mutate,error,isLoading}= useSWR('/api/posts/all', fetcher)
  
 
   return (
     <>
-
+      {data ?
    
       <div className={styles.container}>
         <div className={styles.blogTitle}>
@@ -82,7 +90,8 @@ export default  async function BlogPost({ params }) {
 
      }
 
-    </div> 
+    </div> : " "
+      }
     </>
   );
 };
