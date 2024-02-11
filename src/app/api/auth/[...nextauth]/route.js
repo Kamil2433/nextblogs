@@ -38,8 +38,9 @@ const handler = NextAuth({
         }
       },
     }),
-      secret: process.env.SECRET 
+     
   ],
+   secret: process.env.SECRET ,
   pages: {
     error: "/dashboard/login",
   },
