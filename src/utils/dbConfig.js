@@ -1,46 +1,36 @@
-import mongoose from "mongoose"
+import { MongoClient } from "mongodb";
 
-const MONGODB_URL = process.env.Mongo
+const uri = process.env.Mongo;
+const options = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+};
 
+let mongoClient = null;
+let database = null;
 
-if (!MONGODB_URL) {
-    throw new Error(
-        "Please define the MONGODB_URI environment variable inside .env.local"
-    )
+if (!process.env.Mongo) {
+    throw new Error('Please add your Mongo URI to .env.local')
 }
 
-
-let cached = global.mongoose;
-
-if (!cached) {
-    cached = global.mongoose = {con: null, promise: null}
-}
-
-export const connect= async () => {
-    if (cached.conn) {
-        return cached.conn;
-    }
-
-
-// If a connection does not exist, we check if a promise is already in progress. If a promise is already in progress, we wait for it to resolve to get the connection
-    if (!cached.promise) {
-        const opts = {
-            bufferCommands : false
-        };
-
-        cached.promise = mongoose.connect(MONGODB_URL, opts).then((mongoose) => {
-            return mongoose
-        })
-    }
-
+export async function connect() {
     try {
-        cached.conn = await cached.promise;
+        if (mongoClient && database) {
+            return { mongoClient, database };
+        }
+        if (process.env.NODE_ENV === "development") {
+            if (!global._mongoClient) {
+                mongoClient = await (new MongoClient(uri, options)).connect();
+                global._mongoClient = mongoClient;
+            } else {
+                mongoClient = global._mongoClient;
+            }
+        } else {
+            mongoClient = await (new MongoClient(uri, options)).connect();
+        }
+        database = await mongoClient.db(process.env.Mongo);
+        return { mongoClient, database };
     } catch (e) {
-        cached.promise = null;
-        throw e;
+        console.error(e);
     }
-
-    return cached.conn;
 }
-
-
