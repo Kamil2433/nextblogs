@@ -11,7 +11,7 @@ const connectionParams={
       useUnifiedTopology: true 
 }
 
-const connectmongo=async()=>{
+const connect=async()=>{
 
 // const mon=await mongoose.connect(mongoURI,connectionParams)
 
