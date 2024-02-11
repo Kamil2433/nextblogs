@@ -50,7 +50,7 @@ const Dashboard = () => {
   }
   const handleDelete = async(id)=>{
     try {
-        await fetch(`${process.env.DEV_URL}/api/posts/${id}`,{
+        await fetch(`/api/posts/${id}`,{
           method:"DELETE"
         });
         mutate();
