@@ -1,6 +1,7 @@
 import mongoose from "mongoose"
 
-const MONGODB_URL = process.env.Mongo;
+const MONGODB_URL = process.env.Mongo
+
 
 if (!MONGODB_URL) {
     throw new Error(
