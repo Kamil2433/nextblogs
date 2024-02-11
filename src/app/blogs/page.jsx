@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from "./page.module.css";
 import Link from 'next/link';
-import { BASE_URL } from '@/utils/Constants';
+
 
 const getData = async()=>{
   const res = await fetch(`${process.env.DEV_URL}/api/posts/all`)
