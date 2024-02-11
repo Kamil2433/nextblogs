@@ -41,7 +41,7 @@ export default function BlogPost({ params }) {
   
   // const data=await getData(id);
 
-  const {data,mutate,error,isLoading}= useSWR('/api/posts/all', fetcher)
+  const {data,mutate,error,isLoading}= useSWR(`/api/posts/${id}`, fetcher)
  
 
   return (
@@ -78,20 +78,23 @@ export default function BlogPost({ params }) {
      <Comments id={data._id}/>
      <h3 className={styles.desc}>Comments-</h3>
 
-     {data.comments.map(com=>
+     {data.Comments ?
+     data.comments.map(com=>
 
  <h3 className={styles.blogContent}>{com}</h3>
 
 
+    
 
-
-     )
-
-
+     ) : " "
      }
 
+
+
+     
+
     </div> : " "
-      }
+}
     </>
   );
 };
