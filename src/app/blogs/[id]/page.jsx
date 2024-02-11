@@ -78,7 +78,7 @@ export default function BlogPost({ params }) {
      <Comments id={data._id}/>
      <h3 className={styles.desc}>Comments-</h3>
 
-     {data.Comments ?
+     {data.comments ?
      data.comments.map(com=>
 
  <h3 className={styles.blogContent}>{com}</h3>
