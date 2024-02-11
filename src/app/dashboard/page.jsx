@@ -38,7 +38,7 @@ const Dashboard = () => {
 
     try {
 
-      await fetch(`${process.env.DEV_URL}/api/posts`,{
+      await fetch('/api/posts',{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({title,desc,content,username,image})
