@@ -1,11 +1,13 @@
-/* eslint-disable */
 "use client";
+
 import React from 'react'
 import styles from "./page.module.css";
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import useSWR from "swr";
 import { useState } from 'react';
+import { BASE_URL } from '@/utils/Constants';
+
 
 const Dashboard = () => {
   const [selectedImage, setSelectedImage] = useState();
@@ -14,7 +16,7 @@ const Dashboard = () => {
   const session = useSession();
   const router = useRouter();
   const fetcher = (...args)=> fetch(...args).then(res=>res.json());
-  const {data,mutate,error,isLoading} = useSWR(`/api/posts?username=${session?.data?.user?.name}`,fetcher);
+  const {data,mutate,error,isLoading} = useSWR(`${process.env.DEV_URL}/api/posts?username=${session?.data?.user?.name}`,fetcher);
   console.log(data);
   if(session.status === "loading"){
     return <p>Loading...</p>
@@ -35,7 +37,7 @@ const Dashboard = () => {
 
     try {
 
-      await fetch(`/api/posts`,{
+      await fetch(`${process.env.DEV_URL}/api/posts`,{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body:JSON.stringify({title,desc,content,username,image})
@@ -47,7 +49,7 @@ const Dashboard = () => {
   }
   const handleDelete = async(id)=>{
     try {
-        await fetch(`/api/posts/${id}`,{
+        await fetch(`${process.env.DEV_URL}/api/posts/${id}`,{
           method:"DELETE"
         });
         mutate();
