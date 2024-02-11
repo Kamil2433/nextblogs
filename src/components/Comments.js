@@ -25,6 +25,7 @@ export default function Comments({id}) {
             body: JSON.stringify({ id, comment }),
           });
           // mutate();
+            document.getElementById("comment").value=" "
         } catch (error) {
           console.log(error);
         }
